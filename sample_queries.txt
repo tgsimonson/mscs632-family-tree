@@ -1,0 +1,119 @@
+
+% Basic facts
+
+?- parent(arthur, james).
+true.
+
+?- male(mary).
+false.
+
+% Children of a person
+
+?- children_of(james, Children).
+Children = [daniel, emily].
+
+?- child(C, robert).
+C = sophie ;
+C = lucas.
+
+% Parents and partners
+
+?- parents_of(lucas, Parents).
+Parents = [karen, robert].
+
+?- partners_of(robert, Partners).
+Partners = [diane, karen].
+
+% Grandparents (recursive rule)
+
+?- grandparent(arthur, emily).
+true.
+
+?- grandparent(G, noah).
+G = james ;
+G = linda.
+
+?- grandchildren_of(margaret, Grandchildren).
+Grandchildren = [daniel, emily, henry, lucas, olivia, sophie].
+
+?- generations(margaret, leo, N).
+N = 3.
+
+% Siblings of a person
+
+?- sibling(S, emily).
+S = daniel ;
+S = daniel.
+
+?- siblings_of(emily, Siblings).
+Siblings = [daniel].
+
+?- siblings_of(sophie, Siblings).
+Siblings = [lucas].
+
+?- half_sibling(sophie, lucas).
+true.
+
+?- sibling(emily, olivia).
+false.
+
+% Cousins
+
+?- is_cousin(emily, mia).
+true.
+
+?- is_cousin(emily, daniel).
+false.
+
+?- cousins_of(emily, Cousins).
+Cousins = [henry, lucas, mia, olivia, owen, sophie].
+
+?- second_cousin(noah, leo).
+true.
+
+% Aunts and uncles
+
+?- aunts_of(emily, Aunts).
+Aunts = [susan].
+
+?- uncles_of(emily, Uncles).
+Uncles = [paul, robert].
+
+% Descendants and ancestors (recursive rule)
+
+?- descendants_of(walter, Descendants).
+Descendants = [ava, daniel, emily, linda, mia, noah, owen, paul].
+
+?- ancestors_of(leo, Ancestors).
+Ancestors = [arthur, george, marcus, margaret, olivia, susan].
+
+?- ancestor(eleanor, ava).
+true.
+
+% Naming a relationship
+
+?- relationship(lucas, sophie, R).
+R = half_brother.
+
+?- relationship(robert, noah, R).
+R = great_uncle.
+
+?- relationship(olivia, noah, R).
+R = cousin_once_removed.
+
+?- relationship(thomas, james, R).
+R = son_in_law.
+
+% Family tree from one person (recursive printing)
+
+?- print_tree(walter).
+walter + eleanor
+|-- linda + james
+|   |-- daniel
+|   `-- emily + thomas
+|       |-- ava
+|       `-- noah
+`-- paul + rachel
+    |-- mia
+    `-- owen
+true.
